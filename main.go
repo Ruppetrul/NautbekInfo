@@ -24,9 +24,7 @@ func main() {
 
 	http.HandleFunc("/", web.Home)
 	http.HandleFunc("/api/user_open", api.UserOpen)
-	if err := http.ListenAndServe(":80", nil); err != nil {
-		log.Fatalf("Ошибка при запуске сервера %v", err)
-	}
+
 	switch env {
 	case "production":
 		baseUri := "/etc/letsencrypt/live/crypto-visor.ru/"
@@ -34,7 +32,7 @@ func main() {
 			log.Fatalf("Ошибка при запуске сервера %v", err)
 		}
 	default:
-		if err := http.ListenAndServe(":80", nil); err != nil {
+		if err := http.ListenAndServe(":123", nil); err != nil {
 			log.Fatalf("Ошибка при запуске сервера %v", err)
 		}
 	}
