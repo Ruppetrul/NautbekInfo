@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - APP_ENV=development
+  postgres:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=nautbek_info
+      - POSTGRES_PASSWORD=nautbek_info
+      - POSTGRES_DB=nautbek_info
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
