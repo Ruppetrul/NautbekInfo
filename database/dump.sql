@@ -5,3 +5,4 @@ CREATE TABLE IF NOT EXISTS user_visits (
 );
 
 ALTER TABLE user_visits ADD UNIQUE (visit_date, visit_ip);
+ALTER TABLE user_visits ADD COLUMN app VARCHAR(40);

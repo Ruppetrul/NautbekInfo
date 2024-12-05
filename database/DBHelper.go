@@ -47,17 +47,17 @@ func GetDBInstance() (*DbSingleton, error) {
 	return instance, nil
 }
 
-func IncrementVisitCount(remoteAddress string) error {
+func IncrementVisitCount(remoteAddress string, app string) error {
 	connection, err := GetDBInstance()
 
 	currentDate := time.Now().Format("2006-01-02")
 
 	_, err = connection.Db.Exec(`
-		INSERT INTO user_visits (visit_date, visit_count, visit_ip)
-		VALUES ($1, 1, $2)
+		INSERT INTO user_visits (visit_date, visit_count, visit_ip, app)
+		VALUES ($1, 1, $2, $3)
 		ON CONFLICT (visit_date, visit_ip)
 		DO UPDATE SET visit_count = user_visits.visit_count + 1;
-	`, currentDate, remoteAddress)
+	`, currentDate, remoteAddress, app)
 
 	return err
 }

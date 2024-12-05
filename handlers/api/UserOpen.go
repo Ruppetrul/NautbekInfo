@@ -13,7 +13,7 @@ func UserOpen(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := database.IncrementVisitCount(r.RemoteAddr); err != nil {
+	if err := database.IncrementVisitCount(r.RemoteAddr, app); err != nil {
 		log.Println("Error increment count:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
