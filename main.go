@@ -15,6 +15,7 @@ func main() {
 
 	http.HandleFunc("/", web.Home)
 	http.HandleFunc("/api/user_open", api.UserOpen)
+	http.HandleFunc("/api/user_feedback", api.UserFeedback)
 
 	if err := http.ListenAndServe(":123", nil); err != nil {
 		log.Fatalf("Ошибка при запуске сервера %v", err)

@@ -61,3 +61,16 @@ func IncrementVisitCount(remoteAddress string, app string) error {
 
 	return err
 }
+
+func SaveUserFeedback(remoteAddress string, app string, text string) error {
+	connection, err := GetDBInstance()
+
+	currentDate := time.Now().Format("2006-01-02")
+
+	_, err = connection.Db.Exec(`
+		INSERT INTO user_feedback (visit_date, visit_ip, app, text)
+		VALUES ($1, $2, $3, $4);
+	`, currentDate, remoteAddress, app, text)
+
+	return err
+}
