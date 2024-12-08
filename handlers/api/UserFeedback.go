@@ -2,6 +2,7 @@ package api
 
 import (
 	"NautbekInfo/database"
+	telegram "NautbekInfo/helpers"
 	"log"
 	"net/http"
 )
@@ -30,5 +31,13 @@ func UserFeedback(w http.ResponseWriter, r *http.Request) {
 		log.Println("Error robots response:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
+	}
+	notifyMe(app, text)
+}
+
+func notifyMe(app string, text string) {
+	err := telegram.SendMessage("Feedback" + app + ":" + text)
+	if err != nil {
+		log.Println("Error sending message:", err)
 	}
 }

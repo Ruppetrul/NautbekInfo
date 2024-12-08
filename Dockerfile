@@ -1,6 +1,6 @@
 FROM golang:1.23
 
-WORKDIR /app
+WORKDIR /
 
 COPY go.mod main.go ./
 
@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o main
+RUN go build main.go
 
 EXPOSE 123
 
